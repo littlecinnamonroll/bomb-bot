@@ -7,8 +7,9 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import random
 import datetime
-
-TOKEN = ''
+from dotenv import load_dotenv
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 GUILD = 'The KE Community'
 opencounter = 0
 message_id = 1
