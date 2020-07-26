@@ -126,15 +126,15 @@ async def shut(ctx):
     await ctx.send('The Spanish Inquisition received a tip-off that large amounts of explosives and enchiladas were being gathered in this channel. The game has forcefully been stopped!')
 #game-related actions------------------------------------
 #========================================================
-#@bot.command(name="hand", help="DM the bot to find out what cards are in your hand!")
-#async def hand(ctx):
-#    if ctx.message.author in player_list:
-#        i = ctx.message.author
-#        index = player_list.index(i)
-#        await i.create_dm()
-#        await i.dm_channel.send("Number to card guide: 1-4 are exploding kitten, 5-10 are defuse, 11-14 are tacocat, 15-18 are rainbow cat, 19-22 are potato cat, 23-26 are beard cat, 27-30 are cattermelon")
-#        await i.dm_channel.send("31-35 are see the future, 36-40 are nope, 41-44 are attack, 45-48 are skip, 49-52 are favor, 53-56 are shuffle")
-#        await i.dm_channel.send(f"List of your cards: {', '.join(str(k) for k in cardlists[index])}.
+@bot.command(name="hand", help="DM the bot to find out what cards are in your hand!")
+async def hand(ctx):
+    if ctx.message.author in player_list:
+        i = ctx.message.author
+        index = player_list.index(i)
+        await i.create_dm()
+        await i.dm_channel.send("Number to card guide: 1-4 are exploding kitten, 5-10 are defuse, 11-14 are tacocat, 15-18 are rainbow cat, 19-22 are potato cat, 23-26 are beard cat, 27-30 are cattermelon")
+        await i.dm_channel.send("31-35 are see the future, 36-40 are nope, 41-44 are attack, 45-48 are skip, 49-52 are favor, 53-56 are shuffle")
+        await i.dm_channel.send(f"List of your cards: {', '.join(str(k) for k in cardlists[index])}.
 @bot.command(name="give", help="give a card to the person who asked your favor")
 async def give(ctx, number: int):
     global player1_cards, player2_cards, player3_cards, player4_cards, player5_cards, num
@@ -218,6 +218,7 @@ async def draw(ctx):
             for x in range(5,10):
                 if x in cardlists[turncount-1]:
                     expk = numlist[0]
+                    del numlist[0]
                     cardlists[turncount-1].remove(x)
                     await ctx.send("Successfully defused!")
                     await player_list[turncount-1].create_dm()
